@@ -1,0 +1,164 @@
+/* ===================================== */
+/* PROBLÈME 1 : Somme des Éléments Distincts */
+/* ===================================== */
+
+Algorithme SommeElementsDistincts
+// Calcule la somme de tous les éléments distincts de deux ensembles
+
+Variables:
+    ensemble1, ensemble2 : TABLEAU D'ENTIERS    // Les deux ensembles d'entrée
+    i, j : ENTIER                              // Compteurs de boucle
+    somme : ENTIER := 0                        // Somme des éléments distincts
+    estDistinct : BOOLÉEN                      // Indicateur pour vérifier si l'élément est distinct
+
+Début
+    // Traiter les éléments de ensemble1
+    Pour i de 0 à ensemble1.longueur-1 Faire
+        estDistinct <- VRAI
+        
+        // Vérifier si l'élément existe dans ensemble2
+        Pour j de 0 à ensemble2.longueur-1 Faire
+            Si (ensemble1[i] = ensemble2[j]) Alors
+                estDistinct <- FAUX
+                Sortir // Sort de la boucle
+            Fin Si
+        Fin Pour
+        
+        // Si l'élément est distinct, l'ajouter à la somme
+        Si (estDistinct = VRAI) Alors
+            somme <- somme + ensemble1[i]
+        Fin Si
+    Fin Pour
+    
+    // Traiter les éléments de ensemble2
+    Pour i de 0 à ensemble2.longueur-1 Faire
+        estDistinct <- VRAI
+        
+        // Vérifier si l'élément existe dans ensemble1
+        Pour j de 0 à ensemble1.longueur-1 Faire
+            Si (ensemble2[i] = ensemble1[j]) Alors
+                estDistinct <- FAUX
+                Sortir // Sort de la boucle
+            Fin Si
+        Fin Pour
+        
+        // Si l'élément est distinct, l'ajouter à la somme
+        Si (estDistinct = VRAI) Alors
+            somme <- somme + ensemble2[i]
+        Fin Si
+    Fin Pour
+    
+    Retourner somme
+Fin
+
+/* ===================================== */
+/* PROBLÈME 2 : Produit Scalaire */
+/* ===================================== */
+
+/* Partie 1 : Procédure de Produit Scalaire */
+Procédure produit_scalaire(v1, v2 : TABLEAU DE RÉEL, E/S ps : RÉEL)
+// Calcule le produit scalaire de deux vecteurs
+
+Variables:
+    i : ENTIER
+
+Début
+    ps <- 0
+    
+    // Vérifier si les vecteurs ont la même longueur
+    Si (v1.longueur != v2.longueur) Alors
+        Écrire("Les vecteurs doivent avoir la même longueur")
+        Retourner
+    Fin Si
+    
+    // Calculer le produit scalaire
+    Pour i de 0 à v1.longueur-1 Faire
+        ps <- ps + (v1[i] * v2[i])
+    Fin Pour
+Fin
+
+/* Partie 2 : Vérification d'Orthogonalité avec Procédure */
+Algorithme VerifierVecteursOrthogonaux_AvecProcedure
+// Détermine si des paires de vecteurs sont orthogonales
+
+Variables:
+    n : ENTIER                     // Nombre de paires de vecteurs
+    i : ENTIER                     // Compteur de boucle
+    v1, v2 : TABLEAU DE RÉEL       // Vecteurs à vérifier
+    ps : RÉEL                      // Résultat du produit scalaire
+
+Début
+    // Obtenir le nombre de paires de vecteurs
+    Écrire("Entrez le nombre de paires de vecteurs : ")
+    Lire(n)
+    
+    Pour i de 1 à n Faire
+        // Lire la paire de vecteurs (l'implémentation dépend de la méthode d'entrée)
+        Lire(v1)
+        Lire(v2)
+        
+        // Calculer le produit scalaire
+        produit_scalaire(v1, v2, ps)
+        
+        // Vérifier si les vecteurs sont orthogonaux
+        Si (ps = 0) Alors
+            Écrire("Les vecteurs de la paire ", i, " sont orthogonaux")
+        Sinon
+            Écrire("Les vecteurs de la paire ", i, " ne sont pas orthogonaux")
+        Fin Si
+    Fin Pour
+Fin
+
+/* Partie 3 : Vérification d'Orthogonalité avec Fonction */
+Fonction produit_scalaire_fonc(v1, v2 : TABLEAU DE RÉEL) : RÉEL
+// Calcule le produit scalaire de deux vecteurs
+
+Variables:
+    i : ENTIER
+    resultat : RÉEL := 0
+
+Début
+    // Vérifier si les vecteurs ont la même longueur
+    Si (v1.longueur != v2.longueur) Alors
+        Écrire("Les vecteurs doivent avoir la même longueur")
+        Retourner 0
+    Fin Si
+    
+    // Calculer le produit scalaire
+    Pour i de 0 à v1.longueur-1 Faire
+        resultat <- resultat + (v1[i] * v2[i])
+    Fin Pour
+    
+    Retourner resultat
+Fin
+
+Algorithme VerifierVecteursOrthogonaux_AvecFonction
+// Détermine si des paires de vecteurs sont orthogonales en utilisant une fonction
+
+Variables:
+    n : ENTIER                     // Nombre de paires de vecteurs
+    i : ENTIER                     // Compteur de boucle
+    v1, v2 : TABLEAU DE RÉEL       // Vecteurs à vérifier
+    ps : RÉEL                      // Résultat du produit scalaire
+
+Début
+    // Obtenir le nombre de paires de vecteurs
+    Écrire("Entrez le nombre de paires de vecteurs : ")
+    Lire(n)
+    
+    Pour i de 1 à n Faire
+        // Lire la paire de vecteurs (l'implémentation dépend de la méthode d'entrée)
+        Lire(v1)
+        Lire(v2)
+        
+        // Calculer le produit scalaire en utilisant la fonction
+        ps <- produit_scalaire_fonc(v1, v2)
+        
+        // Vérifier si les vecteurs sont orthogonaux
+        Si (ps = 0) Alors
+            Écrire("Les vecteurs de la paire ", i, " sont orthogonaux")
+        Sinon
+            Écrire("Les vecteurs de la paire ", i, " ne sont pas orthogonaux")
+        Fin Si
+    Fin Pour
+Fin
